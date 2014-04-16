@@ -80,6 +80,5 @@ class UsersController {
         );
 
     }
-}<?php
-    phpinfo();
+}
 ?>

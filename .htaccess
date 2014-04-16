@@ -1,9 +1,6 @@
-﻿<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /
-
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)$ rest/index.php/$1 [L]
-</IfModule>
-
+﻿RewriteEngine on  
+ RewriteBase /login_restful/  
+ RewriteCond %{REQUEST_FILENAME} !-d  
+ RewriteCond %{REQUEST_FILENAME} !-f  
+ RewriteCond %{REQUEST_FILENAME} !-l  
+ RewriteRule ^(.+)$ Api.php?url=$1 [QSA,NC,L]  

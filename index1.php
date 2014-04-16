@@ -1,9 +1,9 @@
 <?php
-// include the various view classes
+// Incluye controlador y vista
 include('views.php');
 include('controllers.php');
 
-// work out what format they want
+// Elegir formato de respuesta
 $accept = explode(',', $_SERVER['HTTP_ACCEPT']);
 if($accept[0] == 'text/html') {
     $view = new HtmlView();
@@ -13,17 +13,17 @@ if($accept[0] == 'text/html') {
     $view = new JsonView();
 }
 
-// grab incoming parameters
+// Recibe parámetros
 $verb = $_SERVER['REQUEST_METHOD'];
 $data = array();
 switch($verb) {
     case 'GET':
-        parse_str($_SERVER['QUERY_STRING'], &$data);
+        parse_str($_SERVER['QUERY_STRING'], $data);
         break;
     case 'POST':
     case 'PUT':
-        // incoming JSON data, it's an array
-        $data = json_decode(file_get_contents('php://input'), true);
+        // Parámetros JSON, matríz
+        //$data = json_decode(file_get_contents('php://input'), true);
         break;
     case 'DELETE':
         // do nothing
@@ -33,7 +33,7 @@ switch($verb) {
         break;
 }
 
-// route the request
+// Enrutar solicitud
 $path = explode('/',$_SERVER['PATH_INFO']);
 $action_name = strtoupper($verb) . 'Action';
 $controller_name = ucfirst($path[1]) . 'Controller';
