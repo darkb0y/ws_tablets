@@ -61,6 +61,7 @@ class Api extends Rest {
 	private function convertirJson($data) {
 		return json_encode($data);
 	}
+	
 	//Retorna usuarios
 	private function usuarios() {
 		if ($_SERVER['REQUEST_METHOD'] != "GET") {
