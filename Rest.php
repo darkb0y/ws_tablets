@@ -4,7 +4,7 @@
  * Filtra los datos enviados en la petición.
  * */
 class Rest {
-	public $tipo = "application/json";
+	//public $tipo = "application/json";
 	public $datosPeticion = array();
 	private $_codEstado = 200;
 	
@@ -13,17 +13,17 @@ class Rest {
 	}
 	
 	//Recibe respuesta Json ($data) y código de estado HTTP($estado)
-	public function mostrarRespuesta($data, $estado) {
+	public function mostrarRespuesta($data, $estado, $tipo) {
 		$this -> _codEstado = ($estado) ? $estado : 200; //Sino se envía $estado, por defecto será 200
-		$this -> setCabecera();
-		echo $data;
+		$this -> setCabecera($tipo);
+		print_r($data);
 		exit;
 	}
 
 	//Envia cabeceras
-	private function setCabecera() {
+	private function setCabecera($tipo) {
 		header("HTTP/1.1 " . $this -> _codEstado . " " . $this -> getCodEstado());
-		header("Content-Type:" . $this -> tipo . ';charset=utf-8');
+		header("Content-Type:" . $tipo . ';charset=utf-8');
 	}
 
 	//Método recursivo para tratar valores recibidos
@@ -60,7 +60,7 @@ class Rest {
 		}
 	}
 	
-	//Códigos de estado
+	//Posibles códigos de estado
 	private function getCodEstado() {
 		$estado = array(200 => 'OK', 
 						201 => 'Created', 
